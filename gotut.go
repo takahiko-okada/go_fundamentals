@@ -29,8 +29,10 @@ func main() {
   fmt.Println(add(num1, num2))
 
   var a int = 62
-  var x := a
+  x := a
   // a assigned to x as integer
   var b float64 = float64(a)
   // converts a into float64 and assign it to b
+  fmt.Println(x)
+  fmt.Println(b)
 }
