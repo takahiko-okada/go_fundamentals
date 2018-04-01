@@ -9,29 +9,37 @@ import ("fmt"
 
 type SitemapIndex struct {
   // slice of location type
-  Locations []Location `xml:"sitemap"`
+  Locations []string `xml:"sitemap">loc`
+// > means location tag under sitemap tag
+
+// type Location struct {
+//   Loc string `xml:"loc"`
+// }
+
+// func (l Location) String() string {
+//   return fmt.Sprintf(l.Loc)
+// Sprintf
 }
 
-type Location struct {
-  Loc string `xml:"loc"`
-}
-
-func (l Location) String() string {
-  return fmt.Sprintf(l.Loc)
-  // Sprintf
+type News struct {
+  Titles []string `xml:"url>news>title"`
+  Keywords []string `xml:"url>news>Keywords"`
+  Locations []string `xml:"url>loc"`
 }
 
 // pulling info from the Internet
 func main() {
+  var s SitemapIndex
+  var n News
   //  _ means a variable you don't intend to use after.
   resp, _ := http.Get("https://www.washingtonpost.com/news-sitemap-index.xml")
   bytes, _ := ioutil.ReadAll(resp.Body)
-  resp.Body.Close()
-
-  var s SitemapIndex
   xml.Unmarshal(bytes, &s)
   // fmt.Println(s.Locations)
   for _, Location := range s.Locations {
-    fmt.Printf ("\n%s", Location)
+    resp, _ := http.Get(Location)
+    bytes, _ := ioutil.ReadAll(resp.Body)
+    xml.Unmarshal(bytes, &n)
+
   }
 }
