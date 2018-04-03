@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+  "fmt"
+  "strings"
+  "io/ioutil"
+)
 
 // Create a new type of 'deck', a slice of strings
 // this means, type 'deck' borrows all the features
@@ -35,4 +39,12 @@ func (d deck) print() {
 // 2 arguments, d deck and handSize int
 func deal(d deck, handSize int) (deck, deck) {
   return d[:handSize], d[handSize:]
+}
+
+func (d deck) toString() string {
+  return strings.Join([]string(d), ",")
+}
+
+func (d deck) saveToFile(filename string) error {
+  return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
 }
