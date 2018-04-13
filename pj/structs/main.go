@@ -12,7 +12,7 @@ type person struct {
   firstName string
   lastName string
   // assign contactInfo Type
-  contact contactInfo
+  contactInfo
 }
 
 // Go automatically assumes struct in the following
@@ -24,13 +24,13 @@ func main() {
   jim := person{
     firstName: "Jim",
     lastName: "Party",
-    contact: contactInfo{
+    contactInfo: contactInfo{
       email: "jim@jim.com",
       zipCode: 20781,
     },
   }
 
-  fmt.Printf("%+v", jim)
+  // fmt.Printf("%+v", jim)
 
   // make a struct variable
   // alex := person{"Alex", "Anderson"}
@@ -46,7 +46,17 @@ func main() {
   // fmt.Println(alex)
   // fmt.Println(john)
   // fmt.Println(simon)
-
+  jim.updateName("jimmy")
+  jim.print()
   // fmt.Printf("%+v", alex)
+}
+
+func (p person) updateName(newFirstName string) {
+  p.firstName = newFirstName
+}
+
+
+func (p person) print() {
+    fmt.Printf("%+v", p)
 }
 
