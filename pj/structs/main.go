@@ -46,13 +46,20 @@ func main() {
   // fmt.Println(alex)
   // fmt.Println(john)
   // fmt.Println(simon)
-  jim.updateName("jimmy")
+  // jimPointer := &jim
+
+  //  by &, Go points to a particular memory slot.
+  //  so that updateName actually changes the value.
+  jimPointer.updateName("jimmy")
   jim.print()
   // fmt.Printf("%+v", alex)
 }
 
-func (p person) updateName(newFirstName string) {
-  p.firstName = newFirstName
+
+
+func (pointerToPerson *person) updateName(newFirstName string) {
+  // * specifies the memory in which the variable is sitting at.
+  (*pointerToPerson).firstName = newFirstName
 }
 
 
