@@ -1,23 +1,28 @@
 package main
 
-import ("fmt"
-"net/http")
+import (
+  "fmt"
+  "net/http"
+  "html/template"
+)
 
-func index_handler(w http.ResponseWriter, r *http.Request) {
+type NewsAggPage struct {
+    Title string
+    News string
+}
 
-  fmt.Fprintf(w, `<h1>Hey There</h1>
-    <p>Go is fast!</p>
-    <p>...and simple!</p>
-    `)
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+  fmt.Fprintf(w, "<h1>Whoa, Go is neat!</h1>")
+}
 
-  fmt.Fprintf(w, "<h1>Hey There</h1>")
-  fmt.Fprintf(w, "<p>Go is fast!</p>")
-  fmt.Fprintf(w, "<p>...and simple!</p>")
-  fmt.Fprintf(w, "<p>You %s even add %s</p>", "can", "<strong>variables</strong>")
-
+func newsAggHandler(w http.ResponseWriter, r *http.Request) {
+  p := NewsAggPage{Title: "Amazing News Aggregator", News: "some news"}
+    t, _ := template.ParseFiles("basictemplating.html")
+    t.Execute(w, p)
 }
 
 func main() {
-  http.HandleFunc("/", index_handler)
+  http.HandleFunc("/", indexHandler)
+  http.HandleFunc("/agg/", newsAggHandler)
   http.ListenAndServe(":8000", nil)
 }

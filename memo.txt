@@ -1,0 +1,25 @@
+Value Types
+  int
+  float
+  string
+  bool
+  structs
+
+Reference Types
+  slices
+  maps
+  channels
+  pointers
+  functions
+
+Creation of Slice in Go
+  - Go creates an array
+  - Go creates a structure that records the length (number of content), capacity (max capacity of the slice),
+  - reference to the array.
+
+Go is a PASS BY VALUE language.
+
+-----------Maps---------------
+
+Map = key & value pairs.
+Keys in a map have to be in the same type. Values have to be in the same type.
